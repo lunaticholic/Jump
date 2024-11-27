@@ -15,6 +15,8 @@ export default function SendAmountPage() {
     const balance = searchParams.get('balance')
     const recipientName = searchParams.get('recipientName')
     const recipientEmail = searchParams.get('recipientEmail')
+
+    
     
     const formatAmount = (amount: string): string => {
         if (!amount) return '0'
@@ -42,6 +44,11 @@ export default function SendAmountPage() {
         })
     }
 
+    // Next 버튼 클릭 시 처리
+    const handleNext = () => {
+        router.push(`/send-money/transfer?amount=${amount}&recipientName=${recipientName}&senderName=${bank}`)
+    }
+
     useEffect(() => {
         setMounted(true)
     }, [])
@@ -49,6 +56,8 @@ export default function SendAmountPage() {
     if (!mounted) {
         return null
     }
+
+    const formattedBalance = formatAmount(balance); // balance 포맷팅
 
     return (
         <main className="p-6 max-w-md mx-auto bg-white min-h-screen">
@@ -64,7 +73,7 @@ export default function SendAmountPage() {
                 <div>
                     <h2 className="text-base font-medium mb-1">From</h2>
                     <p>{bank}</p>
-                    <p className="text-rose-500">Balance - ¥{balance}</p>
+                    <p className="text-rose-500">Balance - ¥{formattedBalance}</p>
                 </div>
 
                 <div>
@@ -92,7 +101,7 @@ export default function SendAmountPage() {
             </div>
 
             {/* Next Button */}
-            <Button className="w-full bg-[#B7D6B7] text-black hover:bg-[#A7C6A7]" onClick={() => router.push('/send-money/confirm')} disabled={!amount || amount === '0'}>
+            <Button className="w-full bg-[#B7D6B7] text-black hover:bg-[#A7C6A7]" onClick={handleNext} disabled={!amount || amount === '0'}>
                 Next
             </Button>
         </main>
