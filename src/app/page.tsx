@@ -1,101 +1,150 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useRouter } from 'next/navigation'
+import { Search, Home, Calendar, CreditCard, QrCode, MoreHorizontal } from 'lucide-react'
+import Image from 'next/image'
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { Button } from '@/components/ui/button'
+
+export default function HomePage() {
+  const router = useRouter()
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className='p-6 max-w-md mx-auto bg-white min-h-screen'>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-serif" />
+        <Button className="p-2" variant="ghost">
+          <Search className="w-5 h-5" />
+        </Button>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Balance */}
+      <div className="space-y-4 mb-8">
+        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100">
+          <div className="flex items-center gap-3" onClick={() => router.push('/accounts/7bank')}>
+            <Image src="/7bank-logo.png" alt="7 Bank" width={40} height={40} className="rounded-lg" />
+            <div>
+              <p className="font-medium">¥ 1,235,200</p>
+              <p className="text-sm text-gray-500">7 Bank</p>
+            </div>
+          </div>
+          <Button className="px-4 py-2 bg-green-100 text-green-800 rounded-lg text-sm" onClick={() => router.push('/send-money')}>
+            Transfer
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        {/* PayPay */}
+        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100">
+          <div className="flex items-center gap-3">
+            <Image src="/paypay-logo.png" alt="PayPay Bank" width={40} height={40} className="rounded-lg" />
+            <div>
+              <p className="font-medium">¥ 40,200</p>
+              <p className="text-sm text-gray-500">PayPay Bank</p>
+            </div>
+          </div>
+          <Button className="px-4 py-2 bg-green-100 text-green-800 rounded-lg text-sm">
+            Transfer
+          </Button>
+        </div>
+
+        {/* Rakuten */}
+        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100">
+          <div className="flex items-center gap-3">
+            <Image src="/rakuten-logo.png" alt="Rakuten Bank" width={40} height={40} className="rounded-lg" />
+            <div>
+              <p className="font-medium">¥ 3,200</p>
+              <p className="text-sm text-gray-500">Rakuten Bank</p>
+            </div>
+          </div>
+          <Button className="px-4 py-2 bg-green-100 text-green-800 rounded-lg text-sm">
+            Transfer
+          </Button>
+        </div>
+
+        {/* Eon */}
+        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100">
+          <div className="flex items-center gap-3">
+            <Image src="/eon-logo.png" alt="Eon Bank" width={40} height={40} className="rounded-lg" />
+            <div>
+              <p className="font-medium">¥ 1,200</p>
+              <p className="text-sm text-gray-500">Eon Bank</p>
+            </div>
+          </div>
+          <Button className="px-4 py-2 bg-green-100 text-green-800 rounded-lg text-sm">
+            Transfer
+          </Button>
+        </div>
+      </div>
+
+      {/* MoneyBeam, QR Payment, Exchange */}
+      <div className="flex gap-4 mb-8">
+        <Button className="flex-1 py-3 bg-green-100 text-green-800 rounded-xl text-sm">
+          MoneyBeam
+        </Button>
+        <Button className="flex-1 py-3 bg-green-100 text-green-800 rounded-xl text-sm">
+          QR Payment
+        </Button>
+        <Button className="flex-1 py-3 bg-green-100 text-green-800 rounded-xl text-sm">
+          Exchange
+        </Button>
+      </div>
+
+      <section>
+        <h2 className="text-xl font-medium mb-4">Promotions</h2>
+        <Carousel>
+          <CarouselContent className="-ml-4">
+            <CarouselItem className="basis-3/10">
+              <div>
+                <Image src="/sushi-promo.png" alt="Sushi House Promotion" width={200} height={150} className="rounded-xl mb-2" />
+                <h3 className="font-medium">$3 off at Sushi House</h3>
+                <p className="text-sm text-gray-500">Until July 1</p>
+              </div>
+            </CarouselItem>
+            <CarouselItem className="basis-4/8">
+              <div>
+                <Image src="/apple-watch-promo.png" alt="Apple Watch Promotion" width={200} height={150} className="rounded-xl mb-2" />
+                <h3 className="font-medium">5% cash back on Apple Watch</h3>
+                <p className="text-sm text-gray-500">Until June 30</p>
+              </div>
+            </CarouselItem>
+            <CarouselItem className="basis-6/10">
+              <div>
+                <Image src="/apple-airpods-promo.png" alt="Apple Airpods Promotion" width={200} height={150} className="rounded-xl mb-2" />
+                <h3 className="font-medium">10% cash back on AirPods</h3>
+                <p className="text-sm text-gray-500">Until June 30</p>
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
+      </section>
+
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
+        <div className="flex justify-around py-3 max-w-md mx-auto">
+          <Button className="flex flex-col items-center gap-1 text-black-500" variant="ghost" onClick={() => router.push('/')}>
+            <Home className="w-5 h-5" />
+            <span className="text-xs">Home</span>
+          </Button>
+          <Button className="flex flex-col items-center gap-1 text-gray-500" variant="ghost" onClick={() => router.push('/accounts')}>
+            <Calendar className="w-5 h-5" />
+            <span className="text-xs">Accounts</span>
+          </Button>
+          <Button className="flex flex-col items-center gap-1 text-gray-500" variant="ghost" onClick={() => router.push('/rewards')}>
+            <CreditCard className="w-5 h-5" />
+            <span className="text-xs">Rewards</span>
+          </Button>
+          <Button className="flex flex-col items-center gap-1 text-gray-500" variant="ghost" onClick={() => router.push('/jump-pay')}>
+            <QrCode className="w-5 h-5" />
+            <span className="text-xs">Jump Pay</span>
+          </Button>
+          <Button className="flex flex-col items-center gap-1 text-gray-500" variant="ghost" onClick={() => router.push('/more')}>
+            <MoreHorizontal className="w-5 h-5" />
+            <span className="text-xs">More</span>
+          </Button>
+        </div>
+      </nav>
+      
+    </main>
+  )
 }
